@@ -1,0 +1,16 @@
+{
+    "name": "clicktrail/twig",
+    "description": "Render-only Twig 3 helpers for ClickTrail attribution: head loader tag, hidden form inputs, consent state attributes.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "twig/twig": "^3.0",
+        "clicktrail/php-sdk": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "ClickTrail\\Twig\\": "src/Twig/"
+        }
+    }
+}
