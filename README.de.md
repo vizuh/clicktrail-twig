@@ -4,7 +4,9 @@
 
 **clicktrail/twig**
 
-Render-only [Twig 3](https://twig.symfony.com/)-Helfer für ClickTrail-Attribution — Ihr Adapter rechnet die Werte vor, diese Funktionen rendern und escapen nur das Markup.
+Render-only [Twig 3](https://twig.symfony.com/)-Helfer für
+ClickTrail-Attribution. Ihr Adapter berechnet die Werte; diese Funktionen
+rendern und escapen nur das Markup.
 
 </div>
 
@@ -25,7 +27,11 @@ Render-only [Twig 3](https://twig.symfony.com/)-Helfer für ClickTrail-Attributi
 
 ## Warum
 
-Attributions-Markup wächst in Templates meist von Hand: kopierte Loader-Tags, versteckte Inputs, die niemand mit der GTM-Variablenliste synchron hält, Consent-Attribute, die abdriften. `clicktrail/twig` gibt October-Komponenten, Craft-Modulen und Symfony-Bundles einen kanonischen Weg, ClickTrail-Markup zu rendern — ohne jegliche Logik.
+Attributions-Markup wächst in Templates meist von Hand: kopierte Loader-Tags,
+versteckte Inputs ohne Synchronisierung mit der GTM-Variablenliste und
+abdriftende Consent-Attribute. `clicktrail/twig` gibt October-Komponenten,
+Craft-Modulen und Symfony-Bundles einen kanonischen Weg, ClickTrail-Markup zu
+rendern, ohne Attributionslogik zu besitzen.
 
 ## Installation
 
@@ -42,7 +48,8 @@ Benötigt PHP >= 8.1, Twig ^3.0 und `clicktrail/php-sdk`.
 {# rendert <script src="/ct/loader.js" data-ct-site-id="acme-store" async></script> #}
 ```
 
-Das ist der ganze Vertrag: Werte rein, escaptes Markup raus. Keine HTTP-Aufrufe, kein Storage, keine Consent-Bewertung — niemals.
+Das ist der ganze Vertrag: Werte rein, escaptes Markup raus. Keine HTTP-Aufrufe,
+kein Storage und keine Consent-Entscheidungen.
 
 ## Loader-Skript-Tag
 
@@ -62,7 +69,11 @@ Rendert das First-Party-Loader-`<script>`-Tag plus `data-ct-*`-Konfigurationsatt
 
 ### `clicktrail_hidden_attribution_inputs(array $attribution): string`
 
-Rendert versteckte `<input>`-Felder, die den vollständigen Attributionskontext in Formulare tragen — dieselbe Feldliste wie die ClickTrail-GTM-Attributionsvariablen und die October-`AttributionHidden`-Komponente: Visitor-/Session-/Event-/Site-IDs, `utm_*`-Werte, alle 10 Ad-Click-IDs, Landingpage, initialer Referrer und Consent-State.
+Rendert versteckte `<input>`-Felder, die den dokumentierten
+Attributionskontext in Formulare tragen. Die Feldliste entspricht der
+ClickTrail-GTM-Attributionsvariable und der October-`AttributionHidden`-Komponente:
+Visitor-/Session-/Event-/Site-IDs, `utm_*`-Werte, alle 10 Ad-Click-IDs,
+Landingpage, initialer Referrer und Consent-State.
 
 `$attribution` ist eine flache vorgerechnete Map, z. B.
 `['visitor_id' => ..., 'session_id' => ..., 'event_id' => ..., 'site_id' => ...,
@@ -89,7 +100,8 @@ Rendert den normalisierten Consent-State als `data-ct-consent-*`-Attribute aus e
           data-ct-consent-analytics_storage="granted" ...> -->
 ```
 
-Unbekannte oder fehlende Schlüssel rendern nichts — die Funktion trifft selbst keine Consent-Bewertung.
+Unbekannte oder fehlende Schlüssel rendern nichts. Die Funktion trifft keine
+Consent-Entscheidung.
 
 ## Wie es sich unterscheidet
 
