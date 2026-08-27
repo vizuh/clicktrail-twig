@@ -4,7 +4,9 @@
 
 **clicktrail/twig**
 
-Helpers render-only para [Twig 3](https://twig.symfony.com/) da atribuição ClickTrail — seu adapter pré-computa os valores; estas funções apenas renderizam e escapam a marcação.
+Helpers render-only para [Twig 3](https://twig.symfony.com/) da atribuição
+ClickTrail. Seu adapter pré-computa os valores; estas funções apenas renderizam
+e escapam a marcação.
 
 </div>
 
@@ -25,7 +27,11 @@ Helpers render-only para [Twig 3](https://twig.symfony.com/) da atribuição Cli
 
 ## Por quê
 
-A marcação de atribuição costuma crescer à mão dentro dos templates: tags de loader copiadas e coladas, inputs ocultos que ninguém mantém em sincronia com a lista de variáveis do GTM, atributos de consentimento que defasam. O `clicktrail/twig` dá aos components de October, módulos Craft e bundles Symfony uma única forma canônica de renderizar a marcação ClickTrail — sem nenhuma da lógica.
+A marcação de atribuição costuma crescer à mão dentro dos templates: tags de
+loader copiadas, inputs ocultos sem sincronia com a lista de variáveis do GTM e
+atributos de consentimento que defasam. O `clicktrail/twig` oferece a components
+October, módulos Craft e bundles Symfony uma forma canônica de renderizar a
+marcação ClickTrail, sem controlar a lógica de atribuição.
 
 ## Instalação
 
@@ -42,7 +48,8 @@ Requer PHP >= 8.1, Twig ^3.0 e `clicktrail/php-sdk`.
 {# renderiza <script src="/ct/loader.js" data-ct-site-id="acme-store" async></script> #}
 ```
 
-Esse é o contrato inteiro: valores entram, marcação escapada sai. Sem chamadas HTTP, sem persistência, sem julgamento de consentimento — nunca.
+Esse é o contrato inteiro: valores entram, marcação escapada sai. Sem chamadas
+HTTP, persistência ou decisões de consentimento.
 
 ## Tag do script de loader
 
@@ -62,7 +69,11 @@ Renderiza a tag `<script>` do loader first-party mais os atributos de configura�
 
 ### `clicktrail_hidden_attribution_inputs(array $attribution): string`
 
-Renderiza campos `<input>` ocultos carregando o contexto completo de atribuição para dentro dos formulários — mesma lista de campos das variáveis de atribuição do GTM da ClickTrail e do component `AttributionHidden` de October: IDs de visitor/session/event/site, valores `utm_*`, todos os 10 ad click IDs, landing page, referrer inicial e estado de consentimento.
+Renderiza campos `<input>` ocultos que levam o contexto de atribuição
+documentado aos formulários. A lista coincide com a variável de atribuição GTM
+do ClickTrail e o component `AttributionHidden` do October: IDs de
+visitor/session/event/site, valores `utm_*`, 10 ad click IDs, landing page,
+referrer inicial e estado de consentimento.
 
 `$attribution` é um mapa plano pré-computado, ex.:
 `['visitor_id' => ..., 'session_id' => ..., 'event_id' => ..., 'site_id' => ...,
@@ -89,7 +100,8 @@ Renderiza o estado de consentimento normalizado como atributos `data-ct-consent-
           data-ct-consent-analytics_storage="granted" ...> -->
 ```
 
-Chaves ausentes ou desconhecidas não rendem nada — a função não faz julgamento de consentimento por conta própria.
+Chaves ausentes ou desconhecidas não rendem nada. A função não decide o estado
+de consentimento.
 
 ## Como é diferente
 
